@@ -32,13 +32,13 @@ namespace Aoc2021Day1
                 }
             }
 
-            Console.WriteLine(increases.ToString());
+            Console.WriteLine(increases);
         }
 
         static void PartTwo(string[] input)
         {
             var increases = 0;
-            var lastMessurement = 99999;
+            var lastMessurement = int.MaxValue;
 
             for (int index = 0; index < input.Length - 2; index++)
             {
@@ -56,7 +56,7 @@ namespace Aoc2021Day1
                 lastMessurement = sum;
             }
 
-            Console.WriteLine(increases.ToString());
+            Console.WriteLine(increases);
         }
     }
 }
