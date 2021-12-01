@@ -9,10 +9,10 @@ namespace Aoc2021Day1
         {
             var input = File.ReadAllLines(@"..\..\..\day1.txt");
 
-            Console.WriteLine("Part 1 results: ");
+            Console.Write("Part 1 results: ");
             PartOne(input);
 
-            Console.WriteLine("Part 2 results: ");
+            Console.Write("Part 2 results: ");
             PartTwo(input);
 
             Console.ReadLine();
@@ -32,7 +32,7 @@ namespace Aoc2021Day1
                 }
             }
 
-            Console.Write(increases.ToString());
+            Console.WriteLine(increases.ToString());
         }
 
         static void PartTwo(string[] input)
@@ -56,7 +56,7 @@ namespace Aoc2021Day1
                 lastMessurement = sum;
             }
 
-            Console.Write(increases.ToString());
+            Console.WriteLine(increases.ToString());
         }
     }
 }
