@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Aoc2021Day1
 {
@@ -6,7 +7,7 @@ namespace Aoc2021Day1
     {
         static void Main(string[] args)
         {
-            var input = System.IO.File.ReadAllLines(@"C:\Users\Dogge\Documents\Aoc 2021 Day1.txt");
+            var input = File.ReadAllLines(@"..\..\..\day1.txt");
 
             Console.WriteLine("Part 1 results: ");
             PartOne(input);
