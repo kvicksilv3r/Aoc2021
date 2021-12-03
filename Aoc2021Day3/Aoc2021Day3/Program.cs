@@ -62,6 +62,11 @@ namespace Aoc2021Day3
 
         private static int OxygenSolver(List<string> inputs, int searchIndex)
         {
+            if (inputs.Count == 1)
+            {
+                return Convert.ToInt32(inputs[0], 2);
+            }
+
             int totalCount = 0;
             int numberToFind = 0;
 
@@ -92,21 +97,16 @@ namespace Aoc2021Day3
                 }
             }
 
-            //keep cearching or return
-
-            if (queue.Count > 1)
-            {
-                return OxygenSolver(queue.ToList(), searchIndex + 1);
-            }
-
-            else
-            {
-                return Convert.ToInt32(inputs[0], 2);
-            }
+            return OxygenSolver(queue.ToList(), searchIndex + 1);
         }
 
         private static int CarbonSolver(List<string> inputs, int searchIndex)
         {
+            if (inputs.Count == 1)
+            {
+                return Convert.ToInt32(inputs[0], 2);
+            }
+
             int totalCount = 0;
             int numberToFind = 0;
 
@@ -135,15 +135,7 @@ namespace Aoc2021Day3
                 }
             }
 
-            if (queue.Count > 1)
-            {
-                return OxygenSolver(queue.ToList(), searchIndex + 1);
-            }
-
-            else
-            {
-                return Convert.ToInt32(inputs[0], 2);
-            }
+            return CarbonSolver(queue.ToList(), searchIndex + 1);
         }
     }
 }
