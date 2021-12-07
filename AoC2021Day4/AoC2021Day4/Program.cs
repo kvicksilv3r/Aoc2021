@@ -67,14 +67,19 @@ namespace AoC2021Day4
             {
                 horizontal = 0;
                 vertical = 0;
-
+                //Console.ReadLine();
                 for (int o = 0; o < 5; o++)
                 {
+                    //Console.WriteLine($"horizontal {i * 5 + o}");
                     if (rolls.Contains(bingoBoard.values[i * 5 + o]))
                     {
                         horizontal++;
                         if (horizontal > 4)
                         {
+                            Console.WriteLine($"Sum of board: {bingoBoard.values.Sum()}");
+                            Console.WriteLine($"Sum of marked: {bingoBoard.values.Where(x => rolls.Contains(x)).Sum()}");
+                            Console.WriteLine($"Sum of unmarked: {bingoBoard.values.Where(x => !rolls.Contains(x)).Sum()}");
+                            Console.ReadLine();
                             return bingoBoard.values.Where(x => !rolls.Contains(x)).Sum();
                         }
                     }
@@ -84,12 +89,16 @@ namespace AoC2021Day4
                         horizontal = 0;
 
                     }
-
+                    //Console.WriteLine($"vertical {i + o * 5}");
                     if (rolls.Contains(bingoBoard.values[i + o * 5]))
                     {
                         vertical++;
                         if (vertical > 4)
                         {
+                            Console.WriteLine($"Sum of board: {bingoBoard.values.Sum()}");
+                            Console.WriteLine($"Sum of marked: {bingoBoard.values.Where(x => rolls.Contains(x)).Sum()}");
+                            Console.WriteLine($"Sum of unmarked: {bingoBoard.values.Where(x => !rolls.Contains(x)).Sum()}");
+                            Console.ReadLine();
                             return bingoBoard.values.Where(x => !rolls.Contains(x)).Sum();
                         }
                     }
