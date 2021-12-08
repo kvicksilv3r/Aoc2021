@@ -10,8 +10,10 @@ namespace AoC2021Day4
         public BingoBoard()
         {
             values = new List<int>();
+            hasWon = false;
         }
         public List<int> values;
+        public bool hasWon;
     }
 
     class Program
@@ -20,7 +22,7 @@ namespace AoC2021Day4
         {
             var input = File.ReadAllLines(@"..\..\..\day4.txt").ToArray();
 
-            var rolls = input[0].Split(",").Select(x => Convert.ToInt32(x)).ToList();
+            var bingoBalls = input[0].Split(",").Select(x => Convert.ToInt32(x)).ToList();
 
             List<BingoBoard> boards = new List<BingoBoard>();
             BingoBoard b = new BingoBoard();
@@ -40,17 +42,18 @@ namespace AoC2021Day4
             boards.Add(b);
 
             //solve
-            for (int roll = 5; roll < rolls.Count; roll++)
+            for (int ballIndex = 5; ballIndex < bingoBalls.Count; ballIndex++)
             {
                 for (int board = 0; board < boards.Count; board++)
                 {
-                    int winningScore = Solve(boards[board], rolls.GetRange(0, roll));
+                    int winningScore = Solve(boards[board], bingoBalls.GetRange(0, ballIndex + 1));
 
-                    if (winningScore != 0)
+                    if (winningScore != 0 && !boards[board].hasWon)
                     {
-                        Console.WriteLine($"Board {board} won at roll number {roll} with value {rolls[roll]}");
-                        Console.WriteLine(winningScore * rolls[roll]);
-                        break;
+
+                        boards[board].hasWon = true;
+                        Console.WriteLine($"Board {board} won at roll number {ballIndex} with value {bingoBalls[ballIndex]}");
+                        Console.WriteLine(winningScore * bingoBalls[ballIndex]);
                     }
                 }
             }
@@ -67,19 +70,13 @@ namespace AoC2021Day4
             {
                 horizontal = 0;
                 vertical = 0;
-                //Console.ReadLine();
                 for (int o = 0; o < 5; o++)
                 {
-                    //Console.WriteLine($"horizontal {i * 5 + o}");
                     if (rolls.Contains(bingoBoard.values[i * 5 + o]))
                     {
                         horizontal++;
                         if (horizontal > 4)
                         {
-                            Console.WriteLine($"Sum of board: {bingoBoard.values.Sum()}");
-                            Console.WriteLine($"Sum of marked: {bingoBoard.values.Where(x => rolls.Contains(x)).Sum()}");
-                            Console.WriteLine($"Sum of unmarked: {bingoBoard.values.Where(x => !rolls.Contains(x)).Sum()}");
-                            Console.ReadLine();
                             return bingoBoard.values.Where(x => !rolls.Contains(x)).Sum();
                         }
                     }
@@ -89,16 +86,11 @@ namespace AoC2021Day4
                         horizontal = 0;
 
                     }
-                    //Console.WriteLine($"vertical {i + o * 5}");
                     if (rolls.Contains(bingoBoard.values[i + o * 5]))
                     {
                         vertical++;
                         if (vertical > 4)
                         {
-                            Console.WriteLine($"Sum of board: {bingoBoard.values.Sum()}");
-                            Console.WriteLine($"Sum of marked: {bingoBoard.values.Where(x => rolls.Contains(x)).Sum()}");
-                            Console.WriteLine($"Sum of unmarked: {bingoBoard.values.Where(x => !rolls.Contains(x)).Sum()}");
-                            Console.ReadLine();
                             return bingoBoard.values.Where(x => !rolls.Contains(x)).Sum();
                         }
                     }
