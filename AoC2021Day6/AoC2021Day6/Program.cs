@@ -10,35 +10,41 @@ namespace AoC2021Day6
     {
         static void Main(string[] args)
         {
-            var allFish = File.ReadAllText(@"..\..\..\example6.txt").Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            int fishBaby = 8;
-            int fishReset = 6;
+            var allFish = File.ReadAllText(@"..\..\..\day6.txt").Split(',').Select(x => Convert.ToInt32(x)).ToList();
             var chrono = new Stopwatch();
 
             chrono.Start();
 
+            long[] fishBuckets = new long[10];
+            long fishCount = allFish.Count;
+
+            for (int i = 0; i < allFish.Count; i++)
+            {
+                fishBuckets[allFish[i]]++;
+            }
+
             for (int day = 0; day < 256; day++)
             {
-                var fishCount = allFish.Count;
-                for (int fish = 0; fish < fishCount; fish++)
+                fishBuckets[9] = fishBuckets[0];
+                fishCount += fishBuckets[0];
+
+                for (int i = 0; i < 8; i++)
                 {
-                    allFish[fish]--;
-                    if (allFish[fish] < 0)
-                    {
-                        allFish.Add(fishBaby);
-                        allFish[fish] = fishReset;
-                    }
+                    fishBuckets[i] = fishBuckets[i + 1];
                 }
+
+                fishBuckets[6] += fishBuckets[9];
+                fishBuckets[8] = fishBuckets[9];
             }
 
             chrono.Stop();
-
-            Console.WriteLine($"Fish was simulated in {chrono.ElapsedMilliseconds} ms");
-            Console.WriteLine($"There are {allFish.Count} fish");
+            Console.WriteLine($"There are {fishCount} fish in v2");
+            Console.WriteLine($"Fish was simulated in {chrono.Elapsed.Ticks * 100} nanoseconds");
         }
     }
 }
 
 //PART 1 - 153002 TOO LOW
 //PART 1 - 362346 JUST RIGHT
-//PART 1 - 29 ms sim
+//PART 2 - 16145419163 TOO LOW
+//PART 2 - 1639643057051 JUST RIGHT
