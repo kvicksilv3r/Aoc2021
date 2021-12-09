@@ -1,0 +1,24 @@
+static void PrintBoard(int[,] lineSegments, int[] pos)
+        {
+            Console.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine();
+
+                for (int j = 0; j < 10; j++)
+                {
+                    if (i < 10 && j < 10)
+                    {
+                        if (pos[0] == j && pos[1] == i)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Red;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
+                        Console.Write($" {lineSegments[j, i]}");
+                    }
+                }
+            }
+        }
