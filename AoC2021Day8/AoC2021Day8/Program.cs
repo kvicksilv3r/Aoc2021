@@ -9,23 +9,17 @@ namespace AoC2021Day8
     {
         static void Main(string[] args)
         {
-            var inputs = File.ReadAllLines(@"..\..\..\day8.txt");
             int counter = 0;
             var matches = new int[] { 2, 4, 3, 7 };
+            var inputs = File.ReadAllLines(@"..\..\..\day8.txt").Select(x => x.Split('|')[1]).Select(z => z.Trim()).Select(y => y.Split(' ')).Where(q => matches.Contains(q.Length)).Count();// .ToList();
 
             foreach (var input in inputs)
             {
-                var s = input.Split('|')[1];
-                var p = s.Split(' ');
-
-                for (int i = 0; i < p.Length; i++)
+                foreach (var thing in input)
                 {
-                    if (p[i] != "" || p[i] != " ")
+                    if (matches.Contains(thing.Length))
                     {
-                        if (matches.Contains(p[i].Length))
-                        {
-                            counter++;
-                        }
+                        counter++;
                     }
                 }
             }
